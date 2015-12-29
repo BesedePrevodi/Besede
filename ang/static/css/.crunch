@@ -1,0 +1,22 @@
+{
+	"compilers": {
+		"less": {
+			"compress": false,
+			"ieCompat": false,
+			"strictMath": false,
+			"strictUnits": false,
+			"javascriptEnabled": false,
+			"sourcemap": true
+		}
+	},
+	"files": {
+		"style.less": {
+			"output": "style.css",
+			"compilers": [
+				"less"
+			],
+			"lastCrunch": "Fri Oct 02 2015 11:31:28 GMT+0200 (CEST)",
+			"sources": []
+		}
+	}
+}

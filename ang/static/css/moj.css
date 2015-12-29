@@ -1,0 +1,29 @@
+.ozadje {
+    background-color: #ffffff;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.sredina{
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+} 
+
+html, body, .main {
+    charset  utf-8;
+    height: 95%;
+}
+
+.btn-blond{
+  border:0px solid transparent; /* this was 1px earlier */
+}
+
+.bottom-ena {
+     margin-bottom: 1cm;
+}
+
+
+.bottom-dva {
+     margin-bottom: 2cm;
+}

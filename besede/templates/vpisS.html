@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<script >
+
+</script>
+
+<div class="ozadje">
+  <center>
+	<h1 class="bottom-ena top-ema">&nbsp;<br>{{ imeNivoja }}</h1>
+
+<table>
+  <tr>
+    <form action="{% url 'besede:vpisS'%}" method="POST" class="form-inline">
+        {% csrf_token %}
+        <input type="hidden" name="akcija"    value="ADD">
+        <input type="hidden" name="nID"       value="{{ nID }}">
+        <input type="hidden" name="sID"       value="0">
+          <td><input type="text" class="form-control"  name="sklop" autofocus>
+          <td><button type="submit" class="btn btn-default">
+            Dodaj sklop        
+          </button>    
+        </form>
+    </tr> 
+    <tr><td>&nbsp;</td></tr>
+  {% for sklop in sklopi %}
+    <form action="{% url 'besede:vpisS'%}" method="POST" class="form-inline">
+      {% csrf_token %}
+         <input type="hidden" name="akcija" value="DEL">
+         <input type="hidden" name="nID"    value="{{ nID }}">        
+         <input type="hidden" name="sID"    value="{{ sklop.id }}">   
+         <input type="hidden" name="sklop"  value="{{ sklop }}">   
+     <tr><td>
+          <a href="{% url 'besede:vpisB'%}?sID={{ sklop.id }}"> {{ sklop }}</a>
+         </td>
+       <td><button type="submit" class="btn-xs btn-default btn-blond"
+                   onclick="return confirm('Če pobrišeš sklop, se bodo pobrisale vse njegove besede.\n\n\nRes želiš pobrisati sklop <{{ sklop }}>?');"
+
+           >
+            <span class="glyphicon glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+          </button>    
+      </td></tr>
+  </form>
+   {%endfor %}
+  </table> 
+  &nbsp;<br>  
+</center>
+</div>
+{% endblock %}

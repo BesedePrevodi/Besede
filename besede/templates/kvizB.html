@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<div class="container ozadje">
+<center><h1 class="bottom-ena"><br>{{ nivo }}</h1></center>
+<hr>
+
+
+  <div class="col-md-4" style="align:left;">
+    <p><input type="checkbox" onClick="preklop(this)" value="x"/> 
+      -- IZBERI VSE --
+    </p>
+  
+    {% for sklop in sklopi %}
+      <p><input type="checkbox" name="cb" 
+   	            value="{{ sklop.id }}">&nbsp; {{ sklop }}
+      </p>
+    {%endfor %}
+  </div>
+
+  <div class="col-md-4">
+    Število vprašanj:&nbsp;&nbsp;
+    <input type="input" id="qnumber" value="20" />
+   	            
+  </div>	
+
+  <div class="col-md-4">
+    <input type="submit" name="go" value="Sestavi kviz!" 
+           data-toggle="modal"   data-target="#myModal"
+           onclick="return on_kviz()"
+    />
+  </div>
+
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <center><h4 class="modal-title">{{ nivo }} - kviz</h4></center>
+      </div>
+      <div class="modal-body">
+        <div id=kviz>
+          ...
+        </div>      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container ozadje">
+<hr>
+</div>
+
+<script>
+  $(".gumb").hover(function () {
+    $(this).css({
+        'cursor': 'pointer'
+    });
+  });
+
+  function preklop(source) {
+    $(':checkbox').each(function() {
+            this.checked = source.checked;                        
+    });
+  }
+
+  function on_kviz() {
+    var ids="";
+    $(":checkbox").each(function() {
+      var vval = $(this).val();
+      if ($(this).is(":checked") && vval != "x") {
+        if (ids != "") ids = ids + ":";
+        ids += vval;
+      }
+    });
+    if (ids == "") ids="/";
+        
+    var params = "?nID={{ nID }}&qNo=" + 
+         document.getElementById('qnumber').value;
+    params    += "&sklops=" + ids;
+
+    $("#kviz").load("{% url 'besede:kvizC'%}" + params);
+  }
+
+</script>
+
+
+{% endblock %}

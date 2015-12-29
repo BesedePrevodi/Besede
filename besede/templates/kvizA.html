@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<div class="ozadje">
+<center>
+<h1 class="bottom-ena"><br>KVIZ<br>Izberi področje</h1>
+<table width = 200>
+   {% for nivo in nivoji %}
+     <tr><td>
+      <a href="{% url 'besede:kvizB'%}?nID={{ nivo.id }}">
+        {{ nivo }}</a><br>
+     </td></tr>       
+   {%endfor %}
+</table>
+</center>  
+</div>
+{% endblock %}

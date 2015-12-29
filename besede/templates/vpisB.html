@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<script >
+
+</script>
+
+<div class="ozadje">
+<center>
+  <h1>&nbsp;<br><a href="{% url 'besede:vpisS'%}?nID={{ nID }}">{{ imeNivoja }}</a></h1>
+  <h2 class="bottom-dva">{{ imeSklopa }}</h2>
+</center>
+
+<div class="row">
+<div class="col-md-1"></div>
+<div class="col-md-10">
+      <form action="{% url 'besede:vpisB'%}" method="POST" class="form-horizontal">
+        {% csrf_token %}
+        <input type="hidden" name="akcija"    value="ADD">
+        <input type="hidden" name="sID"       value="{{ sID }}">
+        <input type="hidden" name="bID"       value="0">
+        <div class="row">
+            <div class="form-group col-xs-2" style="valign:right;">
+              &nbsp;<br>
+            </div>
+            <div class="form-group col-xs-2">
+              Beseda<br>
+              <input type="text" class="form-control"  name="beseda" autofocus>
+            </div>
+            <div class="form-group col-xs-2">
+              Prevod<br>
+              <input type="text" class="form-control"  name="prevod">
+            </div>
+            <div class="form-group col-xs-4">
+              Opis<br>
+              <input type="text" class="form-control"  name="opis" value=" ">
+            </div>
+            <div class="form-group col-xs-2">
+              &nbsp;<br>
+              <button type="submit" class="btn btn-default">
+                Dodaj!
+              </button>    
+            </div>
+          </div>
+        </form>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+<center>
+<table class="table-striped" width="60%">  
+  <tr>
+    </tr>
+  {% for beseda in besede %}
+    <form action="{% url 'besede:vpisB'%}" method="POST" class="form-inline">
+      {% csrf_token %}
+         <input type="hidden" name="akcija" value="DEL">
+         <input type="hidden" name="sID"    value="{{ sID }}">        
+         <input type="hidden" name="bID"    value="{{ beseda.id }}">   
+         <input type="hidden" name="beseda" value=".">   
+         <input type="hidden" name="prevod" value=".">   
+         <input type="hidden" name="opis"   value=".">   
+       <tr>
+        <td><div class="row">
+            <div class="form-group col-xs-3">
+              {{ beseda.beseda }}
+            </div>
+            <div class="form-group col-xs-3">
+              {{ beseda.prevod }}              
+            </div>
+            <div class="form-group col-xs-6">
+              {{ beseda.opis }}
+            </div>
+         </td>
+       <td>
+        <td valign=right>
+        <button type="submit" class="btn-xs btn-blond btn-default">
+          <span class="glyphicon glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button>    
+      </td>            
+      </tr>
+    </form>
+  {%endfor %}
+  </table> 
+  </center>
+  
+</div>
+{% endblock %}

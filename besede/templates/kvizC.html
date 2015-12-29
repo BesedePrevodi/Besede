@@ -1,0 +1,36 @@
+<table>
+{% for b in besede %}
+<tr height=40><td>
+  <span onclick="toggle_visibility('{{ b.beseda }}');">{{ b.beseda }}</span> &nbsp;&nbsp;&nbsp;
+</td>
+<td>
+  <input id="edValue" type="text"
+    onKeyUp="edValueKeyPress(this,'{{ b.beseda }}','{{ b.prevod }}')" >
+</td>
+<td valign=center style="display:none;" id="{{ b.beseda }}"> {{ b.prevod }}
+</td>
+</tr>
+{%endfor %}
+</table>
+
+<script>
+function edValueKeyPress(iField, beseda, prevod) {
+	var trBeseda = iField.value;
+	// $("#"+beseda).text(iField.value);
+	if (trBeseda == "") {
+	  iField.style.backgroundColor = "";
+	} else if (trBeseda.toUpperCase() == prevod.toUpperCase()) {
+      iField.style.backgroundColor = "#99FFBB";
+    } else {
+      iField.style.backgroundColor = "#FF6699";
+    }
+}
+
+function toggle_visibility(id) {
+  var e = document.getElementById(id);
+  if(e.style.display == 'block')
+    e.style.display = 'none';
+  else
+    e.style.display = 'block';
+}
+</script>

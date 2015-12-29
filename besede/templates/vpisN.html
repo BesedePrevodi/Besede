@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static from staticfiles %}
+
+{% block body_block %}
+
+<div class="ozadje">
+  <center>
+	  <h1 class="bottom-ena"><br>Izberi ali dodaj področje</h1>
+<table>
+	<tr>
+		<form action="{% url 'besede:vpisN'%}" method="POST" class="form-inline">
+	      {% csrf_token %}
+	      <input type="hidden" name="akcija" value="ADD">
+        <input type="hidden" name="nID"    value="0">
+          <td><input  type="text" class="form-control"  name="nivo" autofocus>
+          <td><button type="submit" class="btn btn-default">
+            Dodaj področje
+          </button>    
+        </form>
+    </tr> 
+    <tr><td>&nbsp;</td></tr>
+   {% for nivo in nivoji %}
+	<form action="{% url 'besede:vpisN'%}" method="POST" class="form-inline">
+	 {% csrf_token %}
+	   <input type="hidden" name="akcija"  value="DEL">
+     <input type="hidden" name="nID"     value="{{ nivo.id }}">        
+     <input type="hidden" name="nivo"    value="{{ nivo }}">        
+     <tr><td>
+          <a href="{% url 'besede:vpisS'%}?nID={{ nivo.id }}"> {{ nivo }}</a>
+         </td>
+     	 <td><button type="submit" class="btn-xs btn-blond btn-default"
+                   onclick="return confirm('Če pobrišeš področje, se bodo pobrisali vsi njegovi sklopi in besede.\n\n\nRes želiš pobrisati področje <{{ nivo }}>?');"
+            >
+          <span class="glyphicon glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+          </button>    
+      </td></tr>
+  </form>
+   {%endfor %}
+  </table> 
+&nbsp;<br>
+ </center>  
+</div>
+{% endblock %}

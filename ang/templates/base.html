@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static from staticfiles %}
+<head>
+    <meta charset="utf-8" />
+    <title>BESEDišče</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Font awesome include -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <!-- jQuery include -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap include -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Main style -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/moj.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        {% include 'menu.html' %}
+    </div>
+    <div class="container-fluid main">
+        {% block body_block %}{% endblock %}
+    </div>
+</body>
