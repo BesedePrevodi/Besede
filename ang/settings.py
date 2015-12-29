@@ -49,7 +49,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'ang.urls'
@@ -104,4 +104,4 @@ BASE = os.path.abspath(os.path.dirname(__name__))
 
 STATICFILES_DIRS = (os.path.join(BASE, "static"),)
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static_pb/'
